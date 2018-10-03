@@ -16,19 +16,24 @@ class Order extends React.Component {
     if (!fish) return null;
 
     if (!isAvailable) {
-      return
-      <CSSTransition {...transitionOptions}>
-        <li key={key}>
-          Sorry {fish ? fish.name : "fish"} is no longer available
-      </li>
-      </CSSTransition>
+      return (
+        <CSSTransition {...transitionOptions} >
+          <li key={key}>
+            Sorry {fish ? fish.name : "fish"} is no longer available
+          </li>
+        </CSSTransition>
+      );
     }
     return (
-      <CSSTransition {...transitionOptions}>
+      <CSSTransition {...transitionOptions} >
         <li key={key}>
           <span>
             <TransitionGroup component="span" className="count">
-              <CSSTransition {...transitionOptions}>
+              <CSSTransition
+                classNames="count"
+                key={count}
+                timeout={{ enter:500, exit:500 }}
+              >
                 <span>{count}</span>
               </CSSTransition>
             </TransitionGroup>
