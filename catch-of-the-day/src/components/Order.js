@@ -8,8 +8,8 @@ class Order extends React.Component {
     fishes: PropTypes.object,
     order: PropTypes.object,
     removeFromOrder: PropTypes.func
-  }
-  renderOrder = (key) => {
+  };
+  renderOrder = key => {
     const fish = this.props.fishes[key];
     const count = this.props.order[key];
     const isAvailable = fish && fish.status === "available";
@@ -17,13 +17,13 @@ class Order extends React.Component {
       classNames: "order",
       key,
       timeout: { enter: 500, exit: 500 }
-    }
-    // Make sure the fish is loaded before we continue
+    };
+    // Make sure the fish is loaded before we continue!
     if (!fish) return null;
 
     if (!isAvailable) {
       return (
-        <CSSTransition {...transitionOptions} >
+        <CSSTransition {...transitionOptions}>
           <li key={key}>
             Sorry {fish ? fish.name : "fish"} is no longer available
           </li>
@@ -31,29 +31,28 @@ class Order extends React.Component {
       );
     }
     return (
-      <CSSTransition {...transitionOptions} >
+      <CSSTransition {...transitionOptions}>
         <li key={key}>
           <span>
             <TransitionGroup component="span" className="count">
               <CSSTransition
                 classNames="count"
                 key={count}
-                timeout={{ enter:500, exit:500 }}
+                timeout={{ enter: 500, exit: 500 }}
               >
                 <span>{count}</span>
               </CSSTransition>
             </TransitionGroup>
             lbs {fish.name}
             {formatPrice(count * fish.price)}
-            <button
-              onClick={() => this.props.removeFromOrder(key)}>&times;
+            <button onClick={() => this.props.removeFromOrder(key)}>
+              &times;
             </button>
           </span>
         </li>
       </CSSTransition>
     );
-  }
-
+  };
   render() {
     const orderIds = Object.keys(this.props.order);
     const total = orderIds.reduce((prevTotal, key) => {
@@ -73,10 +72,8 @@ class Order extends React.Component {
         </TransitionGroup>
         <div className="total">
           Total:
-        <strong>{formatPrice(total)}</strong>
-
+          <strong>{formatPrice(total)}</strong>
         </div>
-
       </div>
     );
   }
